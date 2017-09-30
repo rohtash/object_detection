@@ -368,6 +368,7 @@ def visualize_boxes_and_labels_on_image_array(image: object,
   box_to_color_map = collections.defaultdict(str)
   box_to_instance_masks_map = {}
   box_to_keypoints_map = collections.defaultdict(list)
+  personcounter = 0
   if not max_boxes_to_draw:
     max_boxes_to_draw = boxes.shape[0]
   for i in range(min(max_boxes_to_draw, boxes.shape[0])):
@@ -383,12 +384,19 @@ def visualize_boxes_and_labels_on_image_array(image: object,
         if not agnostic_mode:
           if classes[i] in category_index.keys():
             class_name = category_index[classes[i]]['name']
+            if class_name == "person":
+                personcounter = personcounter +1
           else:
             class_name = 'N/A'
-          display_str = '{} {}: {}%'.format(
-              int(i+1),
-              class_name,
+          if class_name == "person":
+           display_str = '{} {}: {}%'.format(
+              int(personcounter),
+			  class_name,
               int(100*scores[i]))
+          else:
+            display_str = '{}: {}%'.format(
+               class_name,
+               int(100 * scores[i]))
         else:
           display_str = 'score: {}%'.format(int(100 * scores[i]))
         box_to_display_str_map[box].append(display_str)

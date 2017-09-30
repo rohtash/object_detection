@@ -7,12 +7,12 @@ import tensorflow as tf
 
 cap = cv2.VideoCapture(0)
 
-from object_detection.utils import label_map_util
+from utils import label_map_util
 
-from object_detection.utils import visualization_utils as vis_util
+from utils import visualization_utils as vis_util
 
 # What model to download.
-MODEL_NAME = 'ssd_mobilenet_v1_coco_11_06_2017'
+MODEL_NAME = 'ssd_inception_v2_coco_11_06_2017'
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
